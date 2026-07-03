@@ -1,0 +1,26 @@
+Question 2 - Secure Project Workspace Setup
+
+Directory Structure:
+Created a directory named project_workspace to hold project files, containing two documentation files: plan.txt and notes.txt.
+
+File Permissions Before Modification:
+- project_workspace directory: drwxr-xr-x (755) - owner has read/write/execute; group and others have read/execute
+- plan.txt and notes.txt: -rw-r--r-- (644) - owner has read/write; group and others have read only
+
+File Permissions After Modification:
+- project_workspace directory: drwxr-x--- (750) - owner has read/write/execute; group has read/execute; others have no access
+- plan.txt and notes.txt: -rw-r--r-- (644) - unchanged (only the directory permission was modified)
+
+Ownership Details:
+- The directory and both files are owned by user tauqueer.
+- The numeric listing (ls -ln) shows uid 1000, confirming the owner is tauqueer (uid=1000, gid=1000).
+
+Umask Value Used:
+0022
+This umask subtracts write permission for group and others, which is why new files default to 644 and new directories default to 755.
+
+Explanation of How Permissions Protect Project Data:
+Changing the workspace directory to 750 with chmod removes all access for "other" users on the system, so only the owner (tauqueer) and members of the owning group can enter or list the directory. Because directory execute permission is required to access files inside, users outside the group cannot read the project files even though the files themselves are 644. This layered protection keeps project documentation confidential while still allowing the owner full control and the group read access.
+
+Brief Observations:
+I created the project_workspace directory and two documentation files, recorded the default permissions using ls -ld and ls -l, checked the umask value (0022), verified ownership with id, and then restricted the directory using chmod 750. Comparing the before (755) and after (750) listings confirmed that access for other users was removed.

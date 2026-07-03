@@ -1,0 +1,18 @@
+tauqueer@archlinux ~/D/Linux_Lab_Assignment (main)> cd ~/Desktop/Linux_Lab_Assignment/Question2_Project_Workspace
+tauqueer@archlinux ~/D/L/Question2_Project_Workspace (main)> mkdir -p project_workspace
+tauqueer@archlinux ~/D/L/Question2_Project_Workspace (main)> touch project_workspace/plan.txt project_workspace/notes.txt
+tauqueer@archlinux ~/D/L/Question2_Project_Workspace (main)> ls -ld project_workspace
+drwxr-xr-x - tauqueer  3 Jul 11:47  project_workspace
+tauqueer@archlinux ~/D/L/Question2_Project_Workspace (main)> ls -l project_workspace
+.rw-r--r-- 0 tauqueer  3 Jul 11:47  notes.txt
+.rw-r--r-- 0 tauqueer  3 Jul 11:47  plan.txt
+tauqueer@archlinux ~/D/L/Question2_Project_Workspace (main)> umask
+0022
+tauqueer@archlinux ~/D/L/Question2_Project_Workspace (main)> id
+uid=1000(tauqueer) gid=1000(tauqueer) groups=1000(tauqueer),955(i2c),983(video),992(input),998(wheel)
+tauqueer@archlinux ~/D/L/Question2_Project_Workspace (main)> chmod 750 project_workspace
+tauqueer@archlinux ~/D/L/Question2_Project_Workspace (main)> ls -ld project_workspace
+drwxr-x--- - tauqueer  3 Jul 11:47  project_workspace
+tauqueer@archlinux ~/D/L/Question2_Project_Workspace (main)> ls -ln project_workspace
+.rw-r--r-- 0 1000  3 Jul 11:47  notes.txt
+.rw-r--r-- 0 1000  3 Jul 11:47  plan.txt
