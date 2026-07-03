@@ -1,0 +1,23 @@
+Question 1 - Linux Environment Verification
+
+Username:
+tauqueer
+
+Groups:
+uid=1000(tauqueer) gid=1000(tauqueer) groups=1000(tauqueer),955(i2c),983(video),992(input),998(wheel)
+tauqueer i2c video input wheel
+
+Current Shell:
+/usr/bin/bash
+
+Current Working Directory:
+/home/tauqueer/Desktop/Linux_Lab_Assignment/Question1_Environment_Verification
+
+Workspace Files:
+The ls -la command listed the workspace contents: command_output.txt, Commands_And_Observations.md, Environment_Report.txt, and the screenshots directory. Each entry is owned by tauqueer with standard read/write permissions for the owner.
+
+Network Connectivity:
+The ping command to google.com transmitted 4 packets and received 4 packets with 0% packet loss. Average round-trip time was approximately 49 ms. Network connectivity is working.
+
+Brief Observations:
+I verified the current Linux user using whoami, id, and groups. I checked the default shell with echo "$SHELL" and the working directory with pwd. I listed the workspace files with ls -la and confirmed network connectivity using ping -c 4 google.com. All commands executed successfully and the environment is a standard Arch Linux user account with wheel group membership for administrative access.

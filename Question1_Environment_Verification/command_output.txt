@@ -1,0 +1,25 @@
+tauqueer@archlinux ~/D/L/Question1_Environment_Verification (main)> whoami
+tauqueer
+tauqueer@archlinux ~/D/L/Question1_Environment_Verification (main)> id
+uid=1000(tauqueer) gid=1000(tauqueer) groups=1000(tauqueer),955(i2c),983(video),992(input),998(wheel)
+tauqueer@archlinux ~/D/L/Question1_Environment_Verification (main)> groups
+tauqueer i2c video input wheel
+tauqueer@archlinux ~/D/L/Question1_Environment_Verification (main)> echo "$SHELL"
+/usr/bin/bash
+tauqueer@archlinux ~/D/L/Question1_Environment_Verification (main)> pwd
+/home/tauqueer/Desktop/Linux_Lab_Assignment/Question1_Environment_Verification
+tauqueer@archlinux ~/D/L/Question1_Environment_Verification (main)> ls -la
+.rw-r--r--  1.6k tauqueer  3 Jul 11:43  command_output.txt
+.rw-r--r--  2.6k tauqueer  3 Jul 11:43  Commands_And_Observations.md
+.rw-r--r--  1.2k tauqueer  3 Jul 11:43  Environment_Report.txt
+drwxr-xr-x     - tauqueer  3 Jul 11:41  screenshots
+tauqueer@archlinux ~/D/L/Question1_Environment_Verification (main)> ping -c 4 google.com
+PING google.com (2404:6800:4002:828::200e) 56 data bytes
+64 bytes from tzdelb-ao-in-x0e.1e100.net (2404:6800:4002:828::200e): icmp_seq=1 ttl=114 time=44.1 ms
+64 bytes from tzdelb-ao-in-x0e.1e100.net (2404:6800:4002:828::200e): icmp_seq=2 ttl=114 time=55.9 ms
+64 bytes from tzdelb-ao-in-x0e.1e100.net (2404:6800:4002:828::200e): icmp_seq=3 ttl=114 time=53.1 ms
+64 bytes from tzdelb-ao-in-x0e.1e100.net (2404:6800:4002:828::200e): icmp_seq=4 ttl=114 time=43.0 ms
+
+--- google.com ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 42.961/49.032/55.922/5.583 ms
