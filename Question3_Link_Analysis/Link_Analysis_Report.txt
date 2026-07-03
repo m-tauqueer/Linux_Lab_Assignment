@@ -1,0 +1,24 @@
+Question 3 - File System and Link Analysis
+
+Inode Numbers of All Files:
+- original.txt: inode 4362660
+- hardlink.txt: inode 4362660 (same inode as original.txt - it is a hard link)
+- symlink.txt: inode 4362661 (a different inode - it is a symbolic link)
+
+Comparison Between Hard Link and Symbolic Link:
+- Hard link (hardlink.txt): Shares the exact same inode (4362660) as original.txt and points directly to the same data on disk. Both names have a link count of 2. A hard link is indistinguishable from the original file and has the same size (45 bytes) and permissions (0644).
+- Symbolic link (symlink.txt): Has its own separate inode (4362661) and only stores the path text "original.txt" (12 bytes). It is shown as lrwxrwxrwx (0777) and its link count is 1. It depends on the target path existing.
+
+Effect of Deleting the Original File:
+- After running rm original.txt, the hard link (hardlink.txt) still worked. cat hardlink.txt printed the full content because inode 4362660 still holds the data; the link count simply dropped from 2 to 1.
+- The symbolic link (symlink.txt) became broken. cat symlink.txt failed with "No such file or directory" because it still points to the now-deleted filename original.txt.
+
+Metadata Collected Using Linux Utilities:
+- ls -li showed the inode numbers, permissions, link counts, sizes, and the symlink target.
+- stat provided detailed metadata: file type (regular file vs symbolic link), size, blocks, inode number, link count, permissions, ownership (uid/gid 1000 = tauqueer), and access/modify/change/birth timestamps.
+
+Conclusions Drawn From the Experiment:
+A hard link is a second name for the same inode, so the file data survives as long as at least one hard link remains. A symbolic link is a separate small file that only references a path, so it breaks when the target is removed. This explains why hard links provide data redundancy while symbolic links are more flexible but fragile.
+
+Summary of Findings:
+I created original.txt, made a hard link and a symbolic link to it, and compared their inodes with ls -li and stat. The hard link shared the original's inode (4362660); the symlink had its own inode (4362661). After deleting the original, the hard link still returned the data while the symbolic link became a dangling link, confirming the fundamental difference between the two link types.

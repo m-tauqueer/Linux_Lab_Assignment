@@ -1,0 +1,49 @@
+tauqueer@archlinux ~/D/L/Question3_Link_Analysis (main)> cd ~/Desktop/Linux_Lab_Assignment/Question3_Link_Analysis
+tauqueer@archlinux ~/D/L/Question3_Link_Analysis (main)> mkdir -p link_lab
+tauqueer@archlinux ~/D/L/Question3_Link_Analysis (main)> cd link_lab
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> echo "This is the original file for link analysis." > original.txt
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> ln original.txt hardlink.txt
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> ln -s original.txt symlink.txt
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> ls -li
+4362660 .rw-r--r-- 45 tauqueer  3 Jul 11:53  hardlink.txt
+4362660 .rw-r--r-- 45 tauqueer  3 Jul 11:53  original.txt
+4362661 lrwxrwxrwx  - tauqueer  3 Jul 11:53  symlink.txt -> original.txt
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> stat original.txt
+  File: original.txt
+  Size: 45        	Blocks: 8          IO Block: 4096   regular file
+Device: 259,5	Inode: 4362660     Links: 2
+Access: (0644/-rw-r--r--)  Uid: ( 1000/tauqueer)   Gid: ( 1000/tauqueer)
+Access: 2026-07-03 11:53:36.742402892 +0530
+Modify: 2026-07-03 11:53:30.148929871 +0530
+Change: 2026-07-03 11:53:36.654396586 +0530
+ Birth: 2026-07-03 11:53:30.148929871 +0530
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> stat hardlink.txt
+  File: hardlink.txt
+  Size: 45        	Blocks: 8          IO Block: 4096   regular file
+Device: 259,5	Inode: 4362660     Links: 2
+Access: (0644/-rw-r--r--)  Uid: ( 1000/tauqueer)   Gid: ( 1000/tauqueer)
+Access: 2026-07-03 11:53:36.742402892 +0530
+Modify: 2026-07-03 11:53:30.148929871 +0530
+Change: 2026-07-03 11:53:36.654396586 +0530
+ Birth: 2026-07-03 11:53:30.148929871 +0530
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> stat symlink.txt
+  File: symlink.txt -> original.txt
+  Size: 12        	Blocks: 0          IO Block: 4096   symbolic link
+Device: 259,5	Inode: 4362661     Links: 1
+Access: (0777/lrwxrwxrwx)  Uid: ( 1000/tauqueer)   Gid: ( 1000/tauqueer)
+Access: 2026-07-03 11:53:55.168718704 +0530
+Modify: 2026-07-03 11:53:50.037353137 +0530
+Change: 2026-07-03 11:53:50.037353137 +0530
+ Birth: 2026-07-03 11:53:50.037353137 +0530
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> cat original.txt hardlink.txt symlink.txt
+This is the original file for link analysis.
+This is the original file for link analysis.
+This is the original file for link analysis.
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> rm original.txt
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> ls -li
+4362660 .rw-r--r-- 45 tauqueer  3 Jul 11:53  hardlink.txt
+4362661 lrwxrwxrwx  - tauqueer  3 Jul 11:53  symlink.txt -> original.txt
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> cat hardlink.txt
+This is the original file for link analysis.
+tauqueer@archlinux ~/D/L/Q/link_lab (main)> cat symlink.txt
+cat: symlink.txt: No such file or directory
