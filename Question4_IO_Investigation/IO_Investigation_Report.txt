@@ -1,0 +1,30 @@
+Question 4 - File Access and I/O Investigation
+
+Open Files Identified:
+Using lsof on app.log while a background process held it open:
+- COMMAND: sleep, PID: 131289, USER: tauqueer, FD: 0r, TYPE: REG, SIZE/OFF: 48, NODE: 4106868, NAME: app.log
+
+File Descriptor Observations:
+The ls -l /proc/$fish_pid/fd command showed the current shell's open file descriptors:
+- fd 0 (stdin), fd 1 (stdout), fd 2 (stderr) all point to /dev/pts/1 (the terminal)
+- fd 10 points to anon_inode:inotify
+- fd 11 and fd 12 point to anon_inode:[eventfd]
+This shows that every process tracks its open files as numbered descriptors in /proc.
+
+Output Redirection and Error Redirection Results:
+- echo "This is standard output" > stdout.log successfully captured stdout to a file
+- ls /nonexistent_path_12345 2> stderr.log captured the error message to stderr.log
+- app.log was created with > and appended with >>, containing two log entries
+
+Resource Limits Observed:
+From ulimit -n and /proc/self/limits:
+- Max open files: soft limit 1024, hard limit 524288
+- Max processes: 62508
+- Max file size: unlimited
+- Max stack size: 8388608 bytes (soft)
+
+How Linux Manages File I/O:
+Linux represents open files as file descriptors (integers 0, 1, 2 for stdin/stdout/stderr). Each descriptor in a process points to an entry in the kernel's open file table. The /proc filesystem exposes these as symlinks under /proc/PID/fd, allowing inspection without special tools. Redirection operators (> and 2>) replace or duplicate descriptors so output goes to files instead of the terminal. Resource limits in /proc/self/limits cap how many files a process can open simultaneously.
+
+Brief Observations:
+I created application log files using output redirection, inspected open file descriptors via /proc/$fish_pid/fd, demonstrated stdout and stderr redirection into separate files, checked resource limits with ulimit and /proc/self/limits, and used lsof to identify a background process holding app.log open on file descriptor 0.

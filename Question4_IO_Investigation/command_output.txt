@@ -1,0 +1,45 @@
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> cd ~/Desktop/Linux_Lab_Assignment/Question4_IO_Investigation
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> echo "Application log entry 1" > app.log
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> echo "Application log entry 2" >> app.log
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> cat app.log
+Application log entry 1
+Application log entry 2
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> ls -l /proc/$fish_pid/fd
+lrwx------ 1 tauqueer tauqueer 64 Jul  3 12:09 0 -> /dev/pts/1
+lrwx------ 1 tauqueer tauqueer 64 Jul  3 12:09 1 -> /dev/pts/1
+lrwx------ 1 tauqueer tauqueer 64 Jul  3 12:09 2 -> /dev/pts/1
+lrwx------ 1 tauqueer tauqueer 64 Jul  3 12:09 10 -> anon_inode:inotify
+lrwx------ 1 tauqueer tauqueer 64 Jul  3 12:09 11 -> anon_inode:[eventfd]
+lrwx------ 1 tauqueer tauqueer 64 Jul  3 12:09 12 -> anon_inode:[eventfd]
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> echo "This is standard output" > stdout.log
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> ls /nonexistent_path_12345 2> stderr.log
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> cat stdout.log
+This is standard output
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> cat stderr.log
+"ls: /nonexistent_path_12345": No such file or directory (os error 2)
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> ulimit -n
+1024
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> cat /proc/self/limits
+Limit                     Soft Limit           Hard Limit           Units
+Max cpu time              unlimited            unlimited            seconds
+Max file size             unlimited            unlimited            bytes
+Max data size             unlimited            unlimited            bytes
+Max stack size            8388608              unlimited            bytes
+Max core file size        0                    0                    bytes
+Max resident set          unlimited            unlimited            bytes
+Max processes             62508                62508                processes
+Max open files            1024                 524288               files
+Max locked memory         8388608              8388608              bytes
+Max address space         unlimited            unlimited            bytes
+Max file locks            unlimited            unlimited            locks
+Max pending signals       62508                62508                signals
+Max msgqueue size         819200               819200               bytes
+Max nice priority         0                    0
+Max realtime priority     0                    0
+Max realtime timeout      200000               200000               us
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> sleep 60 < app.log &
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> lsof app.log
+COMMAND    PID     USER FD   TYPE DEVICE SIZE/OFF    NODE NAME
+sleep   131289 tauqueer 0r   REG  259,5       48 4106868 app.log
+tauqueer@archlinux ~/D/L/Question4_IO_Investigation (main)> kill %1
+fish: Job 1, 'sleep 60 < app.log &' terminated by signal SIGTERM (Polite quit request)
