@@ -1,0 +1,26 @@
+tauqueer@archlinux ~/D/L/Question5_Storage_Assessment (main)> cd ~/Desktop/Linux_Lab_Assignment/Question5_Storage_Assessment
+tauqueer@archlinux ~/D/L/Question5_Storage_Assessment (main)> lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+zram0       253:0    0   7.7G  0 disk [SWAP]
+nvme0n1     259:0    0 476.9G  0 disk
+├─nvme0n1p1 259:1    0   200M  0 part /boot/efi
+├─nvme0n1p2 259:2    0    16M  0 part
+├─nvme0n1p3 259:3    0 249.2G  0 part
+├─nvme0n1p4 259:4    0   780M  0 part
+└─nvme0n1p5 259:5    0 226.7G  0 part /
+tauqueer@archlinux ~/D/L/Question5_Storage_Assessment (main)> df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p5  223G   91G  120G  44% /
+/dev/nvme0n1p1  196M   47M  150M  24% /boot/efi
+tmpfs           7.7G   50M  7.7G   1% /tmp
+tmpfs           7.7G  162M  7.5G   3% /dev/shm
+tauqueer@archlinux ~/D/L/Question5_Storage_Assessment (main)> mount | head -15
+/dev/nvme0n1p5 on / type ext4 (rw,relatime)
+/dev/nvme0n1p1 on /boot/efi type vfat (rw,relatime,...)
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,inode64,...)
+tauqueer@archlinux ~/D/L/Question5_Storage_Assessment (main)> df -i
+Filesystem       Inodes   IUsed    IFree IUse% Mounted on
+/dev/nvme0n1p5 14860288 1184860 13675428    8% /
+tmpfs           1048576     599  1047977    1% /tmp
+tauqueer@archlinux ~/D/L/Question5_Storage_Assessment (main)> vim Storage_Assessment_Report.txt
+(No terminal output - report created and edited in vim editor)

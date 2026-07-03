@@ -1,0 +1,36 @@
+Question 5 - Storage Health Assessment and Documentation
+
+Available Storage Devices:
+- nvme0n1: 476.9G NVMe SSD
+  - nvme0n1p1: 200M  -> /boot/efi
+  - nvme0n1p2: 16M
+  - nvme0n1p3: 249.2G
+  - nvme0n1p4: 780M
+  - nvme0n1p5: 226.7G -> /
+- zram0: 7.7G compressed RAM device used for swap
+
+Mounted File Systems:
+- /dev/nvme0n1p5 on / type ext4
+- /dev/nvme0n1p1 on /boot/efi
+- tmpfs on /dev/shm, /tmp, /run (temporary in-memory filesystems)
+
+Disk Usage Statistics:
+- / (nvme0n1p5): 223G total, 91G used, 120G available, 44% used
+- /boot/efi: 196M total, 47M used, 150M available, 24% used
+- /tmp and /dev/shm: 1-3% used
+
+Inode Utilization:
+- / (nvme0n1p5): 14860288 total inodes, 1184860 used, 8% used
+- Plenty of free inodes remain; no risk of inode exhaustion.
+
+Storage Health Observations:
+The root filesystem is at 44% usage with 120G free, which is healthy.
+Inode usage at 8% is well within safe limits. No filesystem is above 80%.
+zram provides compressed swap for extra memory flexibility.
+
+Recommendations for Improving Storage Utilization:
+1. Periodically check large directories with: du -sh *
+2. Clear the pacman package cache: sudo pacman -Sc
+3. Vacuum old system logs: sudo journalctl --vacuum-time=2weeks
+4. Move large media to the unused 249.2G partition or external storage.
+5. Set an alert when root usage crosses 80%.
